@@ -23,7 +23,7 @@ const TodoCard = (props) => {
           {isComplete ? "Completed" : "On Going"}
         </span>
       </p>
-      <Link className="btn-details" to={`/todo/${id}`}>
+      <Link className="btn btn-small btn-primary" to={`/todo/${id}`}>
         Details
       </Link>
     </>

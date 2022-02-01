@@ -10,6 +10,7 @@ const TodoDetails = () => {
   const [checked, setChecked] = useState(false);
   const history = useHistory();
   const [modalRemove, setModalRemove] = useState(false);
+  const [successRemoveModal, setSuccessRemoveModal] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +28,6 @@ const TodoDetails = () => {
           setTodo(data);
           setError(null);
           setChecked(data.isComplete);
-          console.log(data);
         })
         .catch((err) => {
           setError(err.message);
@@ -37,27 +37,18 @@ const TodoDetails = () => {
     }, 2000);
   }, [checked]);
 
-  const getDataFetch = (id) => {
-    return fetch("http://localhost:8000/todos/" + id)
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      });
-  };
-
+  // * Function to fetch the data by the id, then update the isComplete attribute
   const handleChecked = async (id) => {
-    const dataTarget = await getDataFetch(id);
-    const { activity, description, type, isComplete } = dataTarget;
     const updatedData = {
-      id,
-      activity,
-      description,
-      type,
-      isComplete: !isComplete,
+      id: todo.id,
+      activity: todo.activity,
+      description: todo.description,
+      type: todo.type,
+      isComplete: !todo.isComplete,
     };
 
-    // Set the checked state into the reverse of current isComplete property. When the current isComplete is true, make it false, vise versa
-    setChecked(!isComplete);
+    // Set the checked state into the reverse of current isComplete property. When the current isComplete is true, make it false, vise versa. This is to trigger the useEffect hooks to run
+    setChecked(!todo.isComplete);
 
     fetch("http://localhost:8000/todos/" + id, {
       method: "PUT",
@@ -68,18 +59,37 @@ const TodoDetails = () => {
     });
   };
 
+  // * Function to handle when we remove the activity
   const handleRemove = (id) => {
     fetch("http://localhost:8000/todos/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     }).then(() => {
       console.log("Todo removed!");
-      history.push("/");
+      setModalRemove(false);
+      setSuccessRemoveModal(true);
     });
+
+    setTimeout(() => {
+      history.push("/");
+    }, 4000);
   };
 
   return (
     <div className="details-container">
+      {successRemoveModal && (
+        <div className="modal">
+          <div className="modal-body">
+            <img
+              src="../images/checked.png"
+              className="icon-success fade-in"
+              alt="success alert"
+            />
+            <p>Successfully remove the activity</p>
+          </div>
+        </div>
+      )}
+
       {todo && (
         <>
           <div className="details-heading">
@@ -118,10 +128,13 @@ const TodoDetails = () => {
             <p>{todo.description}</p>
           </div>
           <div className="btn-trigger">
-            <Link className="btn-back" to={"/"}>
+            <Link className="btn btn-medium btn-primary" to={"/"}>
               Back
             </Link>
-            <button className="btn-remove" onClick={() => setModalRemove(true)}>
+            <button
+              className="btn btn-medium btn-danger"
+              onClick={() => setModalRemove(true)}
+            >
               Remove Activity
             </button>
           </div>
@@ -142,13 +155,13 @@ const TodoDetails = () => {
             <h4>Are you sure want to delete the activity?</h4>
             <div className="btn-trigger">
               <button
-                className="btn-back"
+                className="btn btn-medium btn-primary"
                 onClick={() => setModalRemove(false)}
               >
                 Cancel
               </button>
               <button
-                className="btn-remove"
+                className="btn btn-medium btn-danger"
                 onClick={() => handleRemove(todo.id)}
               >
                 Confirm

@@ -53,16 +53,24 @@ const AddTodo = () => {
 
     setTimeout(() => {
       history.push("/");
-    }, 3000);
+    }, 6000);
   };
 
   return (
     <div className="add-todo-container">
       {successModal && (
-        <div className="success-msg">
-          <p>You have successfully add new Todo</p>
+        <div className="modal">
+          <div className="modal-body">
+            <img
+              src="./images/checked.png"
+              className="icon-success fade-in"
+              alt="success alert"
+            />
+            <p>Successfully add new activity</p>
+          </div>
         </div>
       )}
+
       <h1>Add Activity</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
@@ -102,11 +110,11 @@ const AddTodo = () => {
           ></textarea>
         </div>
         {isLoading ? (
-          <button className="btn btn-loading" disabled>
-            <BeatLoader color={"#0D488D"} loading={isLoading} size={15} />
+          <button className="btn btn-medium btn-secondary" disabled>
+            <BeatLoader color={"#0D488D"} loading={isLoading} size={14} />
           </button>
         ) : (
-          <button className="btn btn-submit" type="submit">
+          <button className="btn btn-medium btn-submit" type="submit">
             Submit
           </button>
         )}

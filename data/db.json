@@ -8,11 +8,32 @@
       "isComplete": true
     },
     {
-      "id": 2,
-      "activity": "Create ToDo List App using React JS",
-      "description": "Create Todo list application using React JS based on what we got from NetNinja videos. The application includes adding, showing details, and removing the activities.",
-      "type": "Development",
+      "id": 3,
+      "activity": "Learning UX Product Research",
+      "description": "Learning what is product and how to research it!",
+      "type": "Design",
+      "isComplete": false
+    },
+    {
+      "id": 4,
+      "activity": "Watching tv",
+      "description": "Watching indonesia vs timor leste",
+      "type": "Design",
       "isComplete": true
+    },
+    {
+      "activity": "Learning Svelte JS and Sapper",
+      "type": "Development",
+      "description": "Learning Svelte Js for Lingotalk Co, and dont forget about sapper",
+      "isComplete": false,
+      "id": 5
+    },
+    {
+      "activity": "Learning more Hooks on React JS ",
+      "type": "Design",
+      "description": "Learning more Hooks on React Js for the future",
+      "isComplete": false,
+      "id": 6
     }
   ]
 }
