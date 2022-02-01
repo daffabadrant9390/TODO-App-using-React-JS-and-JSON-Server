@@ -1,0 +1,18 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "activity": "Design Portfolio Website",
+      "description": "Designing portfolio website, started by invision and whimsical. Then create wireframe and prototype using Figma to make it more beaufitul. Dont forget to add design system and component to make the design look more consistent",
+      "type": "Design",
+      "isComplete": true
+    },
+    {
+      "id": 2,
+      "activity": "Create ToDo List App using React JS",
+      "description": "Create Todo list application using React JS based on what we got from NetNinja videos. The application includes adding, showing details, and removing the activities.",
+      "type": "Development",
+      "isComplete": true
+    }
+  ]
+}
