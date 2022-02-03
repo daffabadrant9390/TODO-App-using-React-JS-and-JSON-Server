@@ -11,7 +11,7 @@ const Home = () => {
     data: todos,
     isLoading,
     error,
-  } = useFetch("https://todo-list-react-js-new.herokuapp.com/");
+  } = useFetch("http://localhost:8000/todos");
 
   const [query, setQuery] = useState("");
   const [updatedTodos, setUpdatedTodos] = useState([]);
